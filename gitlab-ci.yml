@@ -1,0 +1,13 @@
+homespun-build:
+  script:
+    - apt-get -qq update
+    - apt-get -qq install mono-complete mono-xbuild
+    - git clone --branch patch-1 https://github.com/Wuerfel21/HomeSpun.git
+    - cd HomeSpun
+    - xbuild /p:Configuration=Release /p:TargetFrameworkVersion="v4.5" /p:Platform="Any CPU"
+  artifacts:
+    paths:
+      - HomeSpun/HomeSpun/obj
+    name: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
+  stage: build
+  
